@@ -1,0 +1,32 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "monlloruniv_development",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "port": 5437,
+    "operatorsAliases": false,
+    "logging": true
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "monlloruniv_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "port": 5432,
+    "operatorsAliases": false,
+    "logging": false
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "monlloruniv_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "port": 5432,
+    "operatorsAliases": false,
+    "logging": false
+  }
+}
