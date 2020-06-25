@@ -10,6 +10,7 @@ class RolesController {
     const attrs = ['id', 'name', 'description', 'active'];
     const search = ['name', 'description'];
     const { filter } = req.query;
+
     const options = Parametrizer.getOptions(req.query, attrs, search);
     if (filter) {
       options.where.name = {
@@ -24,7 +25,16 @@ class RolesController {
     //   as: 'permissionsRole',
     //   through: { attributes: [] }
     // }]
-    db.Role.findAndCountAll(options)
+    const limit = +req.query.pageSize || 10;
+    const page = +req.query.pageNumber || 0;
+    const offset = (page) * limit;
+    db.Role.findAndCountAll({
+      attributes: attrs,
+      limit,
+      offset,
+      order: [['id', 'asc']],
+      where: '',
+    })
       .then((data) => {
         res.status(200).json(Parametrizer.responseOk(data, options));
       })

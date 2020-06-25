@@ -2,7 +2,7 @@
 'use strict';
 
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('TeacherSubjects', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('TeacherCourses', {
     id: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
@@ -12,7 +12,7 @@ module.exports = {
       type: Sequelize.INTEGER,
       primaryKey: true,
     },
-    SubjectId: {
+    CourseId: {
       type: Sequelize.INTEGER,
       primaryKey: true,
     },
@@ -25,5 +25,5 @@ module.exports = {
       allowNull: false,
     },
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('TeacherSubjects'),
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('TeacherCourses'),
 };

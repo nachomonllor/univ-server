@@ -1,21 +1,24 @@
 // const express = require('express')
 import express from 'express'
-import db from './models/index'
+import db from './models'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import path from 'path'
 import apiRoutes from './api/api.routes'
 const dotenv = require("dotenv").config({ path: path.join(__dirname, './', '/.env') }).parsed
 
+const uploadRoutes = require('./routes/upload')
+const imagesRoutes = require('./routes/images')
 // creamos un servidor express
 const app = express()
-
 // Body Parser
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 // CORS
 app.use(cors());
 
+app.use('/upload', uploadRoutes)
+app.use('/img', imagesRoutes)
 app.use('/api', apiRoutes)
 app.get('/', (req, res) => {
   res.send('Welcome to my API!')

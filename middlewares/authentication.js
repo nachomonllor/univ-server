@@ -1,7 +1,6 @@
-const jwt = require('jsonwebtoken');
-const node_env = process.env.NODE_ENV || 'development';
-const { SEED } = require('../config/config')[node_env];
-
+const jwt = require('jsonwebtoken')
+const node_env = process.env.NODE_ENV || 'development'
+const config = require('../config').config
 const extractToken = function (req) {
   if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
     return req.headers.authorization.split(' ')[1]
@@ -19,7 +18,7 @@ exports.verifyToken = function(req, res, next) {
   // const { token } = req.query
   const token = extractToken(req)
   if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' })
-  jwt.verify(token, SEED, (err, decoded) => {
+  jwt.verify(token, config.authJwtSecret, (err, decoded) => {
     if (err) {
       return res.status(401).json({
         ok: false,
@@ -35,29 +34,29 @@ exports.verifyToken = function(req, res, next) {
 
 // Verificar Admin
 exports.verifyAdmin = function(req, res, next) {
-  const { user } = req;
-  if (user.role === 'ADMIN_ROLE') {
-    next();
-    return;
+  const { user } = req
+  if (user.role === 'Administrador') {
+    next()
+    return
   }
   return res.status(401).json({
     ok: false,
     message: 'Token incorrecto',
     errors: { message: 'Permiso Denegado para realizar esta tarea' },
-  });
-};
+  })
+}
 
 // Verificar Admin o mismo usuario
 exports.verifyAdminOrSelfUser = function(req, res, next) {
-  const { user } = req;
-  const { id } = req.params;
+  const { user } = req
+  const { id } = req.params
   if (user.role === 'ADMIN_ROLE' || user._id === id) {
-    next();
+    next()
   } else {
     return res.status(401).json({
       ok: false,
       message: 'Token incorrecto - no es admin ni el mismo usuario',
       errors: { message: 'Permiso denegado para realizar esta tarea' },
-    });
+    })
   }
-};
+}

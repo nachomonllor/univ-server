@@ -2,9 +2,9 @@
 module.exports = {
   up(queryInterface) {
     return queryInterface.addConstraint(
-        'Subjects', ['TeacherId'], {
+        'Students', ['UserId'], {
           type: 'foreign key',
-          name: 'fk_Subjects_TeacherId',
+          name: 'fk_Users_StudentId',
           references: {
             table: 'Users', // name of Target model
             field: 'id', // key in Target model that we're referencing
@@ -15,6 +15,6 @@ module.exports = {
       );
   },
   down(queryInterface) {
-    return queryInterface.removeConstraint('Subjects', 'fk_Subjects_TeacherId');
+    return queryInterface.removeConstraint('Students', 'fk_Users_StudentId');
   },
 };

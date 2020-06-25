@@ -33,21 +33,21 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    is_verified: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      default: false
-    },
-    reset_password_token: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      default: false
-    },
-    reset_password_expires: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      default: false
-    },
+    // is_verified: {
+    //   type: DataTypes.BOOLEAN,
+    //   allowNull: false,
+    //   default: false
+    // },
+    // reset_password_token: {
+    //   type: DataTypes.STRING,
+    //   allowNull: true,
+    //   default: false
+    // },
+    // reset_password_expires: {
+    //   type: DataTypes.STRING,
+    //   allowNull: true,
+    //   default: false
+    // },
     img: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -67,14 +67,23 @@ export default (sequelize, DataTypes) => {
   User.associate = (models) => {
     // relaciones
     // 1:M
-    User.hasMany(models.Subject, {
+    User.hasMany(models.Course, {
       foreignKey: 'TeacherId'
     });
+    User.hasOne(models.Student, {
+      foreignKey: 'UserId'
+    });
     // M:M
-    User.belongsToMany(models.Subject, {
-      through: { model: models.TeacherSubject },
-      as: 'subjects',
+    User.belongsToMany(models.Course, {
+      through: { model: models.TeacherCourse },
+      as: 'courses',
       foreignKey: 'TeacherId',
+    });
+    // M:M
+    User.belongsToMany(models.Role, {
+      through: { model: models.UserRole },
+      as: 'roles',
+      foreignKey: 'UserId',
     });
   };
   // Hook se dispara antes de crear el registro en la tabla

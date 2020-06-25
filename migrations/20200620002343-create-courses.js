@@ -1,29 +1,21 @@
 /* eslint-disable no-unused-vars */
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('Subjects', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('Courses', {
     id: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
       primaryKey: true,
-    },
-    TeacherId: {
-      type: Sequelize.INTEGER,
-      allowNull: true,
     },
     name: {
       type: Sequelize.STRING(30),
       allowNull: false,
       unique: true,
     },
-    quarter: {
+    period: {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
-    quarter: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-    },
-    spacesAvailables: {
+    capacity: {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
@@ -38,5 +30,5 @@ module.exports = {
       type: Sequelize.DATE,
     },
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('Subjects'),
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('Courses'),
 };

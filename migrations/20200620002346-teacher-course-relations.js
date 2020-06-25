@@ -2,9 +2,9 @@
 module.exports = {
   up(queryInterface) {
     return queryInterface.addConstraint(
-        'TeacherSubjects', ['TeacherId'], {
+        'TeacherCourses', ['TeacherId'], {
           type: 'foreign key',
-          name: 'fk_TeacherSubjects_TeacherId',
+          name: 'fk_TeacherCourses_TeacherId',
           references: {
             table: 'Users', // name of Target model
             field: 'id', // key in Target model that we're referencing
@@ -13,11 +13,11 @@ module.exports = {
           allowNull: false,
         },
       ), queryInterface.addConstraint(
-        'TeacherSubjects', ['SubjectId'], {
+        'TeacherCourses', ['CourseId'], {
           type: 'foreign key',
-          name: 'fk_TeacherSubjects_SubjectId',
+          name: 'fk_TeacherCourses_CourseId',
           references: {
-            table: 'Subjects', // name of Target model
+            table: 'Courses', // name of Target model
             field: 'id', // key in Target model that we're referencing
           },
           onDelete: 'CASCADE',
@@ -26,7 +26,7 @@ module.exports = {
       );
   },
   down(queryInterface) {
-    return queryInterface.removeConstraint('TeacherSubjects', 'fk_TeacherSubjects_TeacherId'),
-      queryInterface.removeConstraint('TeacherSubjects', 'fk_TeacherSubjects_SubjectId');
+    return queryInterface.removeConstraint('TeacherCourses', 'fk_TeacherCourses_TeacherId'),
+      queryInterface.removeConstraint('TeacherCourses', 'fk_TeacherCourses_CourseId');
   },
 };

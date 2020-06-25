@@ -1,8 +1,6 @@
-import * as bcrypt from 'bcryptjs';
-
 export default (sequelize, DataTypes) => {
 
-  const TeacherSubject = sequelize.define('TeacherSubject', {
+  const TeacherCourse = sequelize.define('TeacherCourse', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -12,7 +10,7 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    SubjectId: {
+    CourseId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -23,12 +21,12 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.DATE,
     },
   });
-  TeacherSubject.associate = (models) => {
+  TeacherCourse.associate = (models) => {
 
   };
   // Method 3 via the direct method
-  TeacherSubject.beforeCreate((TeacherSubject, options) => {
+  TeacherCourse.beforeCreate((TeacherCourse, options) => {
 
   });
-  return TeacherSubject;
+  return TeacherCourse;
 };
